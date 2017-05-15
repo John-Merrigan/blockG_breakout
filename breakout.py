@@ -1,11 +1,11 @@
 # breakout.py
 #
 # CS50 AP
-# Name: ______________
+# Name: John Merrigan
 
 from graphics import *
 from random import *
-
+import bounce
 # height and width of game's window in pixels
 HEIGHT = 600
 WIDTH = 400
@@ -39,11 +39,12 @@ def main():
     # instantiate bricks
     initBricks()
 
-    """ Remove this line to complete program
+
 
     # instantiate ball, centered in middle of window
     ball = initBall()
 
+""" Remove this line to complete program
     # instantiate paddle, centered at bottom of window
     paddle = initPaddle()
 
