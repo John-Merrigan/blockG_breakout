@@ -1,10 +1,12 @@
 # breakout.py
 #
 # CS50 AP
-# Name: ______________
+# Name: John Merrigan
 
 from graphics import *
 from random import *
+import bounce
+import paddle
 
 # height and width of game's window in pixels
 HEIGHT = 600
@@ -39,7 +41,7 @@ def main():
     # instantiate bricks
     initBricks()
 
-    """ Remove this line to complete program
+
 
     # instantiate ball, centered in middle of window
     ball = initBall()
@@ -103,7 +105,6 @@ def main():
             # if no more brickes left you win!
             # TODO
 
-remove this line """
 
     # wait for click before exiting
     win.getMouse()
@@ -124,22 +125,26 @@ def initBricks():
             rect.draw(win)
             bricks.append(rect)
 
-""" remove this line
 
 # instantiate paddle as a rectangle object, in bottom middle of window
 def initPaddle():
-    # TODO
+    paddle = Rectangle(Point(0,PADWIDTH), Point(PADHT,0)
     return paddle
 
 # instantiate ball as a circle in center of window below the scoreboard
 def initBall():
-    # TODO
+    ball = Circle(center, 20)
+    ball.setFill("BLUE")
     return ball
 
 # if ball touches left or right side of window, return True, else return False
 def checkSides(xBall):
-    # TODO
-    return False
+    # if Ball is at the left side
+        #return True
+    # elif Ball is at right side
+        #return True
+    #else
+        #return False
 
 def paddleMove(paddle):
     user_event = win.checkKey()
@@ -202,7 +207,6 @@ def youWin(label):
     time.sleep(4)
     exit(0)
 
-remove this line """
 
 if __name__ == "__main__":
     main()
