@@ -1,4 +1,5 @@
 from graphics import *
+import vlc
 
 # instantiate window
 win = GraphWin("window", 600, 600)
@@ -16,8 +17,11 @@ ball.setFill("BLACK")
 ball.draw(win)
 
 velocity = 2
+p = vlc.MediaPlayer("file:///Users/admin/Desktop/Jimmy Cliff-Breakout.mp3")
+p.play()
 
 while True:
+
 
     # move ball along x-axis
     ball.move(velocity, 0)
@@ -28,8 +32,7 @@ while True:
 
     # bounce off right edge of window
     if xBall + 20 > 320:
-        velocity = -velocity - 100
-
+        velocity = -velocity
     # bounce off left edge of window
     elif xBall - 20 < 0:
         velocity = -velocity
