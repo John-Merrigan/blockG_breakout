@@ -39,10 +39,12 @@ def main():
     # instantiate bricks
     initBricks()
 
-    """ Remove this line to complete program
 
+
+    center=(200,300)
     # instantiate ball, centered in middle of window
     ball = initBall()
+
 
     # instantiate paddle, centered at bottom of window
     paddle = initPaddle()
@@ -69,50 +71,45 @@ def main():
     #wait for mouse click
     win.getMouse()
 
-    # play game
-    while True:
+# play game
+while True:
 
-        # move ball move using xvelocity, yvelocity
+    # move ball move using xvelocity, yvelocity
+    # TODO
+
+    # get x and y coordinate of center of ball (xBall, yBall)
+    # TODO
+
+    # bounce off edge of window
+    # TODO
+
+    # if ball goes below paddle, decrease lives by 1
+    # if no more lives, game over, else sleep 2 seconds and
+    # TODO
+
+    # instantiate new ball
+    # TODO
+
+    # paddle movement
+    paddleMove(paddle)
+
+    # if paddle hits ball reverse ball direction
+
+
+    # detect collision with bricks
+    for brick in bricks:
+        # if ball collides with a brick, undraw the brick
+        # remove the brick from the list (bricks.remove(brick))
+        # reverse the yvelocity
+        # decrease the number of bricks by 1
+        # increase the score by 1
+        # update the scoreboard
+        # if no more brickes left you win!
         # TODO
 
-        # get x and y coordinate of center of ball (xBall, yBall)
-        # TODO
 
-        # bounce off edge of window
-        # TODO
 
-        # if ball goes below paddle, decrease lives by 1
-        # if no more lives, game over, else sleep 2 seconds and
-        # instantiate new ball
-        # TODO
-
-        # paddle movement
-        # TODO
-
-        # if paddle hits ball reverse ball direction
-        # TODO
-
-        # detect collision with bricks
-        for brick in bricks:
-            # if ball collides with a brick, undraw the brick
-            # remove the brick from the list (bricks.remove(brick))
-            # reverse the yvelocity
-            # decrease the number of bricks by 1
-            # increase the score by 1
-            # update the scoreboard
-            # if no more brickes left you win!
-            # TODO
-
-remove this line """
-
-    # wait for click before exiting
-    win.getMouse()
-    win.close()
-
-    # all done!
-    exit(0)
-
-def initBricks():
+        def initBricks():
     color= ["RED", "ORANGE", "YELLOW", "GREEN", "BLUE"]
 
     for i in range (ROWS):
@@ -124,16 +121,20 @@ def initBricks():
             rect.draw(win)
             bricks.append(rect)
 
-""" remove this line
+
 
 # instantiate paddle as a rectangle object, in bottom middle of window
 def initPaddle():
-    # TODO
+    paddle= Rectangle(Point( 150, 560), Point(240, 590))
+    paddle.setFill("BLACK")
+    paddle.draw(win)
     return paddle
 
 # instantiate ball as a circle in center of window below the scoreboard
 def initBall():
-    # TODO
+    ball = Circle(Point(200,250), 10)
+    ball.setFill("BLUE")
+    ball.draw(win)
     return ball
 
 # if ball touches left or right side of window, return True, else return False
@@ -188,6 +189,15 @@ def checkCollision(brick, yBall, xBall):
     else:
         return False
 
+def padHit(paddle, xBall, yBall):
+    pointPaddle = paddle.getP1()
+    xPaddle = pointPaddle.getX()
+    yPaddle = pointPaddle.getY()
+    if xBall + RADIUS >= xPaddle and xBall - RADIUS <= (xPaddle + PADWIDTH) and yPaddle - yBall < 10 and yPaddle - yBall > -10:
+        return True
+    else:
+        return False
+
 def updateScoreboard(label, score):
     label.setText(score)
     return label
@@ -202,7 +212,7 @@ def youWin(label):
     time.sleep(4)
     exit(0)
 
-remove this line """
+
 
 if __name__ == "__main__":
     main()
