@@ -5,6 +5,7 @@
 
 from graphics import *
 from random import *
+from music import *
 
 # height and width of game's window in pixels
 HEIGHT = 600
@@ -33,6 +34,9 @@ bricks = []
 
 # instantiate window
 win = GraphWin("Breakout", WIDTH, HEIGHT)
+
+#play a random song
+playMusic()
 
 def main():
 
