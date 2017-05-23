@@ -5,7 +5,6 @@
 
 from graphics import *
 from random import *
-from music import *
 
 # height and width of game's window in pixels
 HEIGHT = 600
@@ -34,9 +33,6 @@ bricks = []
 
 # instantiate window
 win = GraphWin("Breakout", WIDTH, HEIGHT)
-
-#play a random song
-playMusic()
 
 def main():
 
@@ -75,45 +71,52 @@ def main():
     #wait for mouse click
     win.getMouse()
 
-# play game
-while True:
+    while True:
 
-    # move ball move using xvelocity, yvelocity
-    # TODO
+            # move ball move using xvelocity, yvelocity
+            ball.move(xvelocity, yvelocity)
 
-    # get x and y coordinate of center of ball (xBall, yBall)
-    # TODO
+            # get x and y coordinate of center of ball (xBall, yBall)
+            xBall= ball.getCenter().getX()
+            yBall= ball.getCenter().getY()
 
-    # bounce off edge of window
-    # TODO
-
-    # if ball goes below paddle, decrease lives by 1
-    # if no more lives, game over, else sleep 2 seconds and
-    # TODO
-
-    # instantiate new ball
-    # TODO
-
-    # paddle movement
-    paddleMove(paddle)
-
-    # if paddle hits ball reverse ball direction
+            # bounce off edge of window
+            if checkSides(xBall):
+                xvelocity = -xvelocity
+            #elif checkSides(yBall):
+                #yvelocity = -yvelocity
 
 
-    # detect collision with bricks
-    for brick in bricks:
-        # if ball collides with a brick, undraw the brick
-        # remove the brick from the list (bricks.remove(brick))
-        # reverse the yvelocity
-        # decrease the number of bricks by 1
-        # increase the score by 1
-        # update the scoreboard
-        # if no more brickes left you win!
-        # TODO
+            # if ball goes below paddle, decrease lives by 1
+            # if no more lives, game over, else sleep 2 seconds and
+            # TODO
+
+            # instantiate new ball
+            # TODO
+
+            # paddle movement
+            paddleMove(paddle)
+
+            # if paddle hits ball reverse ball direction
+            if padHit(paddle, xBall, yBall):
+                yvelocity = -yvelocity
+
+            # detect collision with bricks
+            for brick in bricks:
+                # if ball collides with a brick, undraw the brick
+                if checkCollision(brick, xBall, yBall):
+                    bricks.remove(brick)
+                    brick.undraw()
+                # remove the brick from the list (bricks.remove(brick))
+                # reverse the yvelocity
+                # decrease the number of bricks by 1
+                # increase the score by 1
+                # update the scoreboard
+                # if no more brickes left you win!
+                # TODO
 
 
-
-        def initBricks():
+def initBricks():
     color= ["RED", "ORANGE", "YELLOW", "GREEN", "BLUE"]
 
     for i in range (ROWS):
@@ -143,8 +146,10 @@ def initBall():
 
 # if ball touches left or right side of window, return True, else return False
 def checkSides(xBall):
-    # TODO
-    return False
+    if xBall + RADIUS >= 400 or xBall - RADIUS <= 0:
+        return True
+    else:
+        return False
 
 def paddleMove(paddle):
     user_event = win.checkKey()
@@ -215,8 +220,6 @@ def youWin(label):
     updateScoreboard(label, "You Win!")
     time.sleep(4)
     exit(0)
-
-
 
 if __name__ == "__main__":
     main()
