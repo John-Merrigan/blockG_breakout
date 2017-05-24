@@ -1,11 +1,10 @@
 # breakout.py
 #
 # CS50 AP
-# Name: J
+# Name: ______________
 
 from graphics import *
 from random import *
-from music import *
 
 # height and width of game's window in pixels
 HEIGHT = 600
@@ -34,9 +33,6 @@ bricks = []
 
 # instantiate window
 win = GraphWin("Breakout", WIDTH, HEIGHT)
-
-#play a random song
-playMusic()
 
 def main():
 
@@ -87,22 +83,16 @@ def main():
             # bounce off edge of window
             if checkSides(xBall):
                 xvelocity = -xvelocity
-            elif yBall == 0:
-                yvelocity = -yvelocity
+            #elif checkSides(yBall):
+                #yvelocity = -yvelocity
 
 
             # if ball goes below paddle, decrease lives by 1
-            if yBall + RADIUS == 600:
-                ball.undraw()
-                lives = lives - 1
-                updateLives(livesText,lives)
             # if no more lives, game over, else sleep 2 seconds and
-                if lives == 0:
-                    gameOver(label)
-                else:
+            # TODO
+
             # instantiate new ball
-                    ball = initBall()
-                    ball.move(xvelocity, yvelocity)
+            # TODO
 
             # paddle movement
             paddleMove(paddle)
@@ -114,21 +104,16 @@ def main():
             # detect collision with bricks
             for brick in bricks:
                 # if ball collides with a brick, undraw the brick
-                if checkCollision(brick, yBall, xBall):
+                if checkCollision(brick, xBall, yBall):
+                    bricks.remove(brick)
                     brick.undraw()
                 # remove the brick from the list (bricks.remove(brick))
-                    bricks.remove(brick)
                 # reverse the yvelocity
-                    yvelocity = -yvelocity
                 # decrease the number of bricks by 1
-                    numBricks = numBricks - 1
                 # increase the score by 1
-                    score = score + 1
                 # update the scoreboard
-                    updateScoreboard(label, score)
                 # if no more brickes left you win!
-                    if numBricks == 0:
-                        youWin(label)
+                # TODO
 
 
 def initBricks():
