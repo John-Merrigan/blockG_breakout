@@ -4,7 +4,7 @@ from random import *
 
 # height and width of game's window in pixels
 HEIGHT = 600
-WIDTH = 400
+WIDTH = 800
 
 # number of rows and columns of bricks
 ROWS = 5
