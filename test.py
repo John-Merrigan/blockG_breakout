@@ -1,5 +1,6 @@
 from graphics import *
 from random import *
+import copy
 
 
 # height and width of game's window in pixels
@@ -38,10 +39,13 @@ def main():
 
 
 
+
     center=(200,300)
     # instantiate ball, centered in middle of window
     ball = initBall()
-    AcidBall()
+    powerup= AcidBall()
+    #powerup = initBall()
+
 
 
     # instantiate paddle, centered at bottom of window
@@ -55,6 +59,7 @@ def main():
 
     # instantiate lives scorekeeper
     livesText = initLives()
+    livesText.setFill("WHITE")
 
     # number of points initially
     score = 0
@@ -84,6 +89,11 @@ def main():
             elif yBall == 0:
                 yvelocity = -yvelocity
 
+            while powerup:
+                yvelocity = yvelocity
+
+
+
 
             # if ball goes below paddle, decrease lives by 1
             if yBall + RADIUS == 600:
@@ -110,10 +120,11 @@ def main():
                 # if ball collides with a brick, undraw the brick
                 if checkCollision(brick, yBall, xBall):
                     brick.undraw()
+                    copy.copy(initBall)
                 # remove the brick from the list (bricks.remove(brick))
                     bricks.remove(brick)
                 # reverse the yvelocity
-                    yvelocity = -yvelocity
+                    yvelocity = -yvelocity+.5
                 # decrease the number of bricks by 1
                     numBricks = numBricks - 1
                 # increase the score by 1
@@ -233,7 +244,8 @@ def youWin(label):
 def AcidBall():
     user_event = win.checkKey()
     if user_event == "Up":
-        ball.setFill("GREEN")
+        powerup.setFill("GREEN")
+
 
 
 if __name__ == "__main__":

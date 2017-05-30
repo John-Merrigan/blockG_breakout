@@ -1,10 +1,6 @@
-# breakout.py
-#
-# CS50 AP
-# Name: ______________
-
 from graphics import *
 from random import *
+
 
 # height and width of game's window in pixels
 HEIGHT = 600
@@ -33,6 +29,9 @@ bricks = []
 
 # instantiate window
 win = GraphWin("Breakout", WIDTH, HEIGHT)
+
+
+
 
 def main():
 
@@ -65,8 +64,8 @@ def main():
     numBricks = COLS * ROWS
 
     # initial velocity
-    xvelocity = (random() * 3 + 2)
-    yvelocity = 2.0
+    xvelocity = (random() * 3 + 3)
+    yvelocity = 2.5
 
     #wait for mouse click
     win.getMouse()
@@ -83,16 +82,23 @@ def main():
             # bounce off edge of window
             if checkSides(xBall):
                 xvelocity = -xvelocity
-            #elif checkSides(yBall):
-                #yvelocity = -yvelocity
+            elif yBall == 0:
+                yvelocity = -yvelocity
 
 
             # if ball goes below paddle, decrease lives by 1
+            if yBall >= 600:
+                ball.undraw()
+                lives = lives - 1
+                updateLives(livesText,lives)
+                time.sleep(1)
             # if no more lives, game over, else sleep 2 seconds and
-            # TODO
-
+                if lives == 0:
+                    gameOver(label)
+                else:
             # instantiate new ball
-            # TODO
+                    ball = initBall()
+                    ball.move(xvelocity, yvelocity)
 
             # paddle movement
             paddleMove(paddle)
@@ -104,16 +110,21 @@ def main():
             # detect collision with bricks
             for brick in bricks:
                 # if ball collides with a brick, undraw the brick
-                if checkCollision(brick, xBall, yBall):
-                    bricks.remove(brick)
+                if checkCollision(brick, yBall, xBall):
                     brick.undraw()
                 # remove the brick from the list (bricks.remove(brick))
+                    bricks.remove(brick)
                 # reverse the yvelocity
+                    yvelocity = -yvelocity + .5
                 # decrease the number of bricks by 1
+                    numBricks = numBricks - 1
                 # increase the score by 1
+                    score = score + 1
                 # update the scoreboard
+                    updateScoreboard(label, score)
                 # if no more brickes left you win!
-                # TODO
+                    if numBricks == 0:
+                        youWin(label)
 
 
 def initBricks():
@@ -156,9 +167,9 @@ def paddleMove(paddle):
     padPt = paddle.getP1()
     padX = padPt.getX()
     if user_event == "Left" and padX > 0:
-        paddle.move(-20, 0)
+        paddle.move(-50, 0)
     elif user_event == "Right" and padX + PADWIDTH < WIDTH:
-        paddle.move(20, 0)
+        paddle.move(50, 0)
 
 def padHit(paddle, xBall, yBall):
     pointPaddle = paddle.getP1()
