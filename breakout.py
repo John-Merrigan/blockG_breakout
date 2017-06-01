@@ -116,7 +116,7 @@ def main():
                 # remove the brick from the list (bricks.remove(brick))
                     bricks.remove(brick)
                 # reverse the yvelocity
-                    yvelocity = -yvelocity + .5
+                    yvelocity = -yvelocity + .1
                 # decrease the number of bricks by 1
                     numBricks = numBricks - 1
                 # increase the score by 1
