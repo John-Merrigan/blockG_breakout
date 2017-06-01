@@ -158,7 +158,7 @@ def initBall():
 
 # if ball touches left or right side of window, return True, else return False
 def checkSides(xBall):
-    if xBall + RADIUS >= 400 or xBall - RADIUS <= 0:
+    if xBall + RADIUS >= 800 or xBall - RADIUS <= 0:
         return True
     else:
         return False
