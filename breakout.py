@@ -29,6 +29,7 @@ bricks = []
 
 # instantiate window
 win = GraphWin("Breakout", WIDTH, HEIGHT)
+win.setBackground("BLACK")
 
 
 
@@ -144,7 +145,7 @@ def initBricks():
 # instantiate paddle as a rectangle object, in bottom middle of window
 def initPaddle():
     paddle= Rectangle(Point( 150, 560), Point(240, 590))
-    paddle.setFill("BLACK")
+    paddle.setFill("WHITE")
     paddle.draw(win)
     return paddle
 
